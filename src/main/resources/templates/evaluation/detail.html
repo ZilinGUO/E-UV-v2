@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>主页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon"  href="favicon.ico"> <link href="/css/bootstrap.min.css?v=3.3.6" type="text/css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css?v=4.4.0" type="text/css" rel="stylesheet">
+    <link   rel="stylesheet" type="text/css"  href="/css/animate.css" >
+    <link  rel="stylesheet"  type="text/css" href="/css/style.css?v=4.1.0"  >
+</head>
+<body>
+<div class="col-lg-10 col-lg-offset-1">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div class="text-center article-title">
+                <h1>
+                  标题
+                </h1>
+            </div>
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>Temps de creation：</dt>
+                    <dd>时间</dd>
+                    <dt>Description：</dt>
+                    <dd>
+                      描述
+                    </dd>
+                    <dt>Status：</dt>
+<!--                        是否有效                    -->
+                    <dd>
+                        <span class="label label-primary">Ouvert</span>
+                    </dd>
+<!--                    {% else %}-->
+<!--                    <dd>-->
+<!--                        <span class="label label-danger">Fermé</span>-->
+<!--                    </dd>-->
+<!--                    {% endif %}-->
+                </dl>
+            </div>
+            <p class="text-center">
+                <strong>内容</strong>
+            </p>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Réponses：</h2>
+<!--                    {% for response in responses %}-->
+                    <div class="social-feed-box">
+                        <div class="social-avatar">
+                            <div class="media-body">
+                                <a>
+学生名字                                </a>
+                                <small class="text-muted">回答时间</small>
+                            </div>
+                        </div>
+                        <div class="social-body">
+                            <p>
+                                内容
+<!--                                {{ response.rcontent }}-->
+                            </p>
+                        </div>
+                    </div>
+<!--                    {% endfor %}-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<!-- 自定义js -->
+<script src="/js/hAdmin.js?v=4.1.0"></script>
+<script type="text/javascript" src="/js/homePage.js"></script>
+<script src="/js/plugins/pace/pace.min.js"></script>
+</body>
+</html>
