@@ -4,5 +4,9 @@ import com.gl52.euv.pojo.User;
 
 public interface UserService {
 
-    public User identify(String name,String password);
+     User identify(String name,String password);
+     void insertGroupId(int userId,int groupId);
+     boolean isHasGroup(int userId);
+     int getGroupId(int userId);
+
 }

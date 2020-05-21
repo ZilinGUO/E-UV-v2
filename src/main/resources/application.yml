@@ -5,6 +5,10 @@ spring:
     username: root
     password:
     type: com.alibaba.druid.pool.DruidDataSource
+  mvc:
+    view:
+      suffix: .html
+      prefix: /
 #  mvc:
 #    static-path-pattern=/static/**:
 #mybatis:

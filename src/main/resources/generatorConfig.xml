@@ -51,11 +51,13 @@
 
 
         <!-- 列出要生成代码的所有表，这里配置的是不生成Example文件 -->
-        <table tableName="t_group" schema="" domainObjectName="Group" ></table>
-        <table tableName="t_post" schema=""  domainObjectName="Post"></table>
-        <table tableName="t_project" schema="" domainObjectName="Project"></table>
+<!--        <table tableName="t_group" schema="" domainObjectName="Group" ></table>-->
+
         <table tableName="t_subject" schema="" domainObjectName="Subject"></table>
-        <table tableName="t_user" schema="" domainObjectName="User"></table>
+
+        <table tableName="t_evaluation" schema="" domainObjectName="Evaluation"></table>
+
+        <table tableName="t_response" schema="" domainObjectName="Response"></table>
 
         <!--               domainObjectName="Entreprise"-->
 <!--               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"-->

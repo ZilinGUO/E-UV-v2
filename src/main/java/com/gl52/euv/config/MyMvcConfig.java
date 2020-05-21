@@ -13,6 +13,19 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("login");
         registry.addViewController("/main.html").setViewName("homePage");
         registry.addViewController("/showProject.html").setViewName("projects");
+        registry.addViewController("/showSubject.html").setViewName("subjectCreation");
+        registry.addViewController("/groups.html").setViewName("groups");
+        registry.addViewController("/groupCreation.html").setViewName("groupCreation");
+        registry.addViewController("/getEvaluation.html").setViewName("/evaluation/getEvaluation");
+        registry.addViewController("/detail.html").setViewName("/evaluation/detail");
+        registry.addViewController("/evaluation/setEvaluation.html").setViewName("/evaluation/setEvaluation");
+        registry.addViewController("/evaluation/evaluations.html").setViewName("/evaluation/evaluations");
+        registry.addViewController("/evaluation/setResponse.html").setViewName("/evaluation/setResponse");
+
+
+
+
+//        registry.addViewController("/showProject.do").setViewName("projects");
 
     }
     //注册拦截器

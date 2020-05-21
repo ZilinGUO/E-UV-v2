@@ -25,21 +25,9 @@ $(document).ready(function(){
 
     })
 
-    // $.ajax({
-    //     url: "/Project/findAllProject.do",
-    //     type: "post",
-    //     async: false,//是否异步请求
-    //     success: function (data) {
-    //         console.log(data);
-    //         $('#table').bootstrapTable("hideLoading");
-    //         $('#table').bootstrapTable('append',data);
-    //     }
-    //
-    // })
-
 
     $("#table").bootstrapTable({
-        url:'/Project/findAllProject.do',  //获取表格数据
+        url:'/Project/findAllSubject.do',  //获取表格数据
         //使用post传参，去掉后无法成功
         method: "get",
         toolbar:"#companyToolbar",
@@ -64,25 +52,31 @@ $(document).ready(function(){
                 offset : params.offset, // SQL语句起始索引
             }
         },
-        idField:'projectid',             //指定主键列
+        idField:'subjectId',             //指定主键列
         columns:[{
 
             // radio: true, // 单选
             checkbox: true,
             width: 50
         },{
-            field:'projectName',  //返回json中的name
-            title:'project name',   //表格表头显示文字
+            field:'subjectname',  //返回json中的name
+            title:'subject name',   //表格表头显示文字
             halign:'center', //表头居中
             align:'center',
             valign: 'middle' // 上下居中
         },{
             field:'description',  //返回json中的name
             title:'description',   //表格表头显示文字
-
             halign:'center',
             align:'center',   //左右居中
-            valign: 'middle' // 上下居中
+            valign: 'middle', // 上下居中
+            formatter:function(value,row,index){
+                value=row.description;
+                if(value.length>20){
+                    value= value.substr(0, 80)+'...'
+                }
+                return value;
+            }
         }
         ]
     });
@@ -101,8 +95,18 @@ function simpleLoad(btn, state) {
     }
 }
 
-function edit(){
+function createProject(){
     // 获取当前行
     var row=$("#table").bootstrapTable('getSelections');
-    console.log(row);
+    console.log(window.parent.document.getElementById("J_iframe"));
+    window.parent.document.getElementById("J_iframe").setAttribute('src',"/showSubject.html");
+}
+
+function showProjectInformation() {
+    var row=$("#table").bootstrapTable('getSelections');
+    console.log(row[0].subjectid);
+    window.parent.document.getElementById("J_iframe").setAttribute('src',"/Project/subjectInformation.do?subjectId="+row[0].subjectid);
+
+    // window.location.href="http://localhost:8080/simpleforum/Subject/toCreateSubjectPage.do";
+
 }
