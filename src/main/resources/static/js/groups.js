@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var joinResult = document.getElementById("joinResult").innerText;
+    window.groupId=null;
     if(joinResult!=""){
         alert(joinResult);
     };
@@ -24,7 +25,15 @@ $(document).ready(function(){
         data: {},
         async: false,//是否异步请求
         success: function (data) {
-            console.log(data);
+            if(data!=null&&data.role==1){
+
+            }else if(data!=null&&data.role==0){
+                $('#joinGroup').hide();
+                $('#creatGroup').hide();
+            }
+            if(data!=null&&data.groupid!=null){
+                window.groupId=data.groupid;
+            }
         }
 
     })
@@ -119,6 +128,10 @@ function simpleLoad(btn, state) {
 }
 
 function createGroup(){
+    if(window.groupId!=null){
+        alert('you already have a group!!!');
+        return;
+    }
     // 获取当前行
     var row=$("#table").bootstrapTable('getSelections');
     console.log(window.parent.document.getElementById("J_iframe"));
@@ -133,6 +146,10 @@ function showProjectInformation() {
     // window.location.href="http://localhost:8080/simpleforum/Subject/toCreateSubjectPage.do";
 }
 function joinGroup() {
+    if(window.groupId!=null){
+        alert('you already have a group!!!');
+        return;
+    }
     var row=$("#table").bootstrapTable('getSelections');
     if(row==null||row.length==0){
         alert('choose a group first');
@@ -142,12 +159,17 @@ function joinGroup() {
         alert('choose one group');
         return;
     }
-    if(row[0].total==row[0].number_max-1){
+    if(row[0].total==row[0].number_max){
         alert('The number of groups has reached the upper limit');
         return;
     }
    // window.parent.document.getElementById("J_iframe").setAttribute('src',"/Project/subjectInformation.do?subjectId="+row[0].subjectid);
-    window.location.href="/Group/joinGroup.do?groupId="+row[0].groupId;
+    var gnl=confirm("确定要加入?");
+    if (gnl==true){
+        window.location.href="/Group/joinGroup.do?groupId="+row[0].groupId;
+    }else{
+        return false;
+    }
 }
 
 function enterMyGroup() {

@@ -3,12 +3,6 @@ $(document).ready(function(){
     $('#loading-example-btn').click(function () {
         btn = $(this);
         simpleLoad(btn, true)
-
-        // Ajax example
-//                $.ajax().always(function () {
-//                    simpleLoad($(this), false)
-//                });
-
         simpleLoad(btn, false)
     });
 
@@ -20,7 +14,9 @@ $(document).ready(function(){
         data: {},
         async: false,//是否异步请求
         success: function (data) {
-            console.log(data);
+            if(data!=null&&data.role==1){
+                $('#createProject').hide();
+            }
         }
 
     })
@@ -104,7 +100,10 @@ function createProject(){
 
 function showProjectInformation() {
     var row=$("#table").bootstrapTable('getSelections');
-    console.log(row[0].subjectid);
+    if(row==null||row.length==0){
+        alert("Choisir un projet !!!")
+        return;
+    }
     window.parent.document.getElementById("J_iframe").setAttribute('src',"/Project/subjectInformation.do?subjectId="+row[0].subjectid);
 
     // window.location.href="http://localhost:8080/simpleforum/Subject/toCreateSubjectPage.do";

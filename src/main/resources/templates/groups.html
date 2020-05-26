@@ -27,31 +27,16 @@
 
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>所有项目</h5>
+                    <h5>Les groups</h5>
                     <div class="ibox-tools">
-                        <a href="#" class="btn btn-primary btn-xs" onclick="createGroup()">Créer une nouvelle équipe</a>
+                        <a id="creatGroup" href="#" class="btn btn-primary btn-xs" onclick="createGroup()">Créer une nouvelle équipe</a>
+                        <a id="joinGroup" href="#" class="btn btn-primary btn-xs" onclick="joinGroup()">Rejoins le groupe</a>
+                        <a id="enterGroup" href="#" class="btn btn-primary btn-xs" onclick="enterMyGroup()">Access à mon group</a>
+
                     </div>
                 </div>
                 <div class="ibox-content">
                     <div class="row m-b-sm m-t-sm">
-                        <div class="col-md-1">
-                            <button type="button" id="loading-example-btn" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> 刷新</button>
-                        </div>
-                        <div class="col-md-11">
-                            <div class="input-group" style="padding-left:890px">
-
-<!--                                <input type="text" placeholder="请输入项目名称" class="input-sm form-control"> <span class="input-group-btn">-->
-                                <span class="input-group-btn">
-                                        <button  type="button" class="btn btn-sm btn-primary" onclick="joinGroup()">Rejoins le groupe</button> </span>
-                                <span class="input-group-btn">
-                                    <button  style="margin-left:10px" type="button" class="btn btn-sm btn-primary" onclick="enterMyGroup()">Access à mon group</button>
-                                </span>
-<!--                                <span class="input-group-btn">-->
-<!--                                    <button  style="margin-left:10px" type="button" class="btn btn-sm btn-primary" onclick="showProjectInformation()"> 查看我的小组</button>-->
-<!--                                </span>-->
-
-                            </div>
-                        </div>
                     </div>
 
                     <div class="project-list">

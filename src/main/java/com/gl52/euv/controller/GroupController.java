@@ -52,9 +52,12 @@ public class GroupController {
         int subjectId = Integer.parseInt(param.get("subjectId").toString());
         int userId= (int) session.getAttribute("userId");
         try {
-            if(!groupService.createGroup(groupName,subjectId,userId)){
+            Integer groupID=groupService.createGroup(groupName,subjectId,userId);
+            if(groupID==null){
                 map.put("msg","you already have a group");
-            };
+            }else{
+                session.setAttribute("groupid", groupID);
+            }
             return "groups";
         }   catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +80,8 @@ public class GroupController {
         try {
             if(!groupService.joinGroup(groupID,userId)){
                 map.put("msg","you already have a group");
-
+            }else{
+                session.setAttribute("groupid", groupID);
             }
             return "groups";
         }   catch (Exception e) {

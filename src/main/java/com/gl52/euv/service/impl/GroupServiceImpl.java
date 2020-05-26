@@ -38,7 +38,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean createGroup(String groupName, int subjectId, int userId) {
+    public Integer createGroup(String groupName, int subjectId, int userId) {
         if(!userService.isHasGroup(userId)){
             Group group=new Group();
             group.setSubjectid(subjectId);
@@ -47,9 +47,9 @@ public class GroupServiceImpl implements GroupService {
             group.setIsValid(0);
             groupMapper.insertSelective(group);
             userService.insertGroupId(userId,group.getGroupid());
-            return true;
+            return group.getGroupid();
         }
-        return false;
+        return null;
     }
 
     @Override

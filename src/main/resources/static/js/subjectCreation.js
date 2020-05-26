@@ -3,12 +3,24 @@ $(document).ready(function() {
 
 });
 function check(form) {
+    var subjectName=$('#subjectName').val();
+    var description=$('#description').val();
+    if(subjectName==''||description==''){
+        alert('Remplissez toutes les informations');
+        return;
+    }
     var minimum=$('#minimum').val();
     var maximum=$('#maximum').val();
 
     if(minimum>maximum){
-        alert('The minimum number of people must be bigger than the maximum');
+        alert('Le nombre minimum de personnes doit être supérieur au maximum');
         return;
     }
-     $('#form').submit();
+    var gnl=confirm("确定要提交?");
+    if (gnl==true){
+        $('#form').submit();
+    }else{
+        return false;
+    }
+
 }

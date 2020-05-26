@@ -7,7 +7,7 @@ import java.util.Map;
 public interface GroupService {
     Map<String,Object> getAllGroups(Map<String, Object> param);
 
-    boolean createGroup(String groupName, int subjectId, int userId);
+    Integer createGroup(String groupName, int subjectId, int userId);
 
     boolean joinGroup(int groupId, int userId);
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,8 +29,10 @@
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-area-chart"></i>
-                                        <strong class="font-bold">Spider</strong>
+                                        <strong class="font-bold">E-UV</strong>
                                     </span>
+                                    <p class="text-center" th:inline="text">Bonjour [[${username}]] !!
+                                    </p>
                               </span>
                             </a>
                         </div>
@@ -39,29 +41,31 @@
                     </li>
                   
                     <li>
-                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">项目管理</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="/showProject.html">项目</a></li>
-							<li><a class="J_menuItem" href="/groups.html">团队管理</a></li>
+                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Gestion projets</span><span class="fa arrow"></span></a>
+
+
+                        <ul class="nav nav-second-level" >
+                            <li><a  class="J_menuItem" href="/showProject.html">Les projets</a></li>
+							<li><a class="J_menuItem" href="/groups.html">Gestion des groupes</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="nav-label">Gestion des évaluations</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
+                        <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion évaluations</span><span class="fa arrow"></span></a>
+
+
+                        <ul class="nav nav-second-level" th:switch = "${role}">
+                            <li th:case="0">
                                 <a class="J_menuItem" href="/Evaluation/findAllEvaluation.do">Mes évaluations</a>
                             </li>
-                            <li>
+                            <li th:case="1">
                                 <a class="J_menuItem" href="/Evaluation/upateAndfindAllEvaluation.do">Répondre évaluations</a>
-                            </li>
-                            <li><a class="J_menuItem" href="/evaluation/setEvaluation.html">Proposer évaluations</a>
+                            </li >
+<!--                            <li th:case="1"><a class="J_menuItem" href="/evaluation/setEvaluation.html">Proposer évaluations</a>-->
                         </ul>
                     </li>
                     <li>
-                        <a href="/EUV">
+                        <a href="/User/logout.do">
+                            <i class="fa fa-magic"></i>
                             <span class="nav-label">Déconnecter</span>
                         </a>
                     </li>

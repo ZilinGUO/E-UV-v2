@@ -58,9 +58,11 @@ public class EvaluationServiceImpl implements EvaluationService {
     public List<Evaluation> upateAndfindAllEvaluation() {
         List<Evaluation> evaluations=getAllEvaluation();
         for(Evaluation evaluation:evaluations){
-            if(!testState(evaluation.getEcreated(),evaluation.getEduration())){
-                evaluation.setEvaild(false);
-                evaluationMapper.updateByPrimaryKeySelective(evaluation);
+            if(evaluation.getEvaild()) {
+                if (!testState(evaluation.getEcreated(), evaluation.getEduration())) {
+                    evaluation.setEvaild(false);
+                    evaluationMapper.updateByPrimaryKeySelective(evaluation);
+                }
             }
         }
         return evaluations;
@@ -72,7 +74,8 @@ public class EvaluationServiceImpl implements EvaluationService {
         long nh = 1000 * 60 * 60;
         Date currentTime=new Date();
         long diff = currentTime.getTime() - createTime.getTime();
-        long hour = diff % nd / nh;
+        long day = diff / nd;
+        long hour = diff % nd / nh+ day * 24;
         if(hour>duration)return false;
         return true;
     }
