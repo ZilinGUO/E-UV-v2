@@ -21,32 +21,30 @@
         <div class="ibox">
             <div class="ibox-content">
                 <div class="text-center article-title">
-                    <h1>
-                        标题
-                    </h1>
+                    <h1 th:inline="text">[[${evaluation.etitle}]] </h1>
                 </div>
                 <div>
                     <dl class="dl-horizontal">
                         <dt>Temps de creation：</dt>
-                        <dd>创建时间</dd>
+                        <dd th:inline="text">[[${evaluation.ecreated}]]</dd>
                         <dt>Description：</dt>
-                        <dd>
-                            描述
-                        </dd>
+                        <dd th:inline="text">[[${evaluation.ecreated}]]</dd>
                         <dt>Status：</dt>
 <!--                        状态判断-->
-                        <dd>
-                            <span class="label label-primary">Ouvert</span>
-                        </dd>
-<!--                        {% else %}-->
-<!--                        <dd>-->
-<!--                            <span class="label label-danger">Fermé</span>-->
-<!--                        </dd>-->
-<!--                        {% endif %}-->
+                        <div th:switch = "${evaluation.evaild}">
+                            <dd th:case="true">
+                                <span class="label label-primary">Ouvert</span>
+                            </dd>
+
+                            <dd th:case="false">
+                                <span class="label label-danger">Fermé</span>
+                            </dd>
+                        </div>
+
                     </dl>
                 </div>
                 <p class="text-center">
-                    <strong>e问题</strong>
+                    <strong th:inline="text">[[${evaluation.econtent}]]</strong>
                 </p>
                 <hr>
                 <div class="row">
@@ -55,8 +53,10 @@
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <form role="form" action="/student/postResponse/{{ id }}" method="post">
+                                    <form role="form" th:action="'/Response/postResponse.do?eid='+${evaluation.eid}"    th:object="${evaluation}" method="post">
 <!--                                        <fieldset {{ disabled }}>-->
+                                        <div th:switch = "${evaluation.evaild}">
+                                            <fieldset th:case="true"  >
                                             <div class="form-group">
                                                 <label>Content</label>
                                                 <textarea class="form-control" name="rcontent" placeholder="Entrer votre contenu" rows="5"></textarea>
@@ -67,9 +67,27 @@
                                                 </button>
                                             </div>
                                             <p class="text-center">
-                                                <small>信息</small>
+<!--                                                <small>信息</small>-->
                                             </p>
+                                            </fieldset>
+                                            <fieldset th:case="false" disabled="true">
+                                                <div class="form-group">
+                                                    <label>Content</label>
+                                                    <textarea class="form-control" name="rcontent" placeholder="Entrer votre contenu" rows="5"></textarea>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
+                                                        <strong>Publier</strong>
+                                                    </button>
+                                                </div>
+                                                <p class="text-center">
+                                                    <!--                                                <small>信息</small>-->
+                                                </p>
+                                            </fieldset>
+                                        </div>
                                     </form>
+
+
                                 </div>
                             </div>
                         </div>

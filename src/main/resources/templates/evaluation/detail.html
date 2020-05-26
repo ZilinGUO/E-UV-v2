@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,51 +20,47 @@
     <div class="ibox">
         <div class="ibox-content">
             <div class="text-center article-title">
-                <h1>
-                  标题
-                </h1>
+                <h1 th:text="${evaluation.etitle}"></h1>
             </div>
             <div>
                 <dl class="dl-horizontal">
                     <dt>Temps de creation：</dt>
-                    <dd>时间</dd>
-                    <dt>Description：</dt>
-                    <dd>
-                      描述
+                    <dd th:text="${evaluation.ecreated}"></dd>
+                    <dt >Description：</dt>
+                    <dd th:text="${evaluation.edesp}">
                     </dd>
-                    <dt>Status：</dt>
+                    <dt >Status：</dt>
 <!--                        是否有效                    -->
-                    <dd>
-                        <span class="label label-primary">Ouvert</span>
-                    </dd>
-<!--                    {% else %}-->
-<!--                    <dd>-->
-<!--                        <span class="label label-danger">Fermé</span>-->
-<!--                    </dd>-->
+                    <div th:switch = "${evaluation.evaild}">
+                        <dd th:case="true" >
+                            <span  class="label label-primary">Ouvert</span>
+                        </dd>
+
+                        <dd th:case="false" >
+                            <span class="label label-danger">Fermé</span>
+                        </dd>
+                    </div>
+
 <!--                    {% endif %}-->
                 </dl>
             </div>
             <p class="text-center">
-                <strong>内容</strong>
+                <strong th:text="${evaluation.econtent}"></strong>
             </p>
             <hr>
             <div class="row">
                 <div class="col-lg-12">
                     <h2>Réponses：</h2>
 <!--                    {% for response in responses %}-->
-                    <div class="social-feed-box">
+                    <div th:each="response:${responses}" class="social-feed-box">
                         <div class="social-avatar">
                             <div class="media-body">
-                                <a>
-学生名字                                </a>
-                                <small class="text-muted">回答时间</small>
+                                <a th:text="${response.user_name}"></a>
+                                <small class="text-muted" th:text="${response.rcreated}"></small>
                             </div>
                         </div>
                         <div class="social-body">
-                            <p>
-                                内容
-<!--                                {{ response.rcontent }}-->
-                            </p>
+                            <p th:text="${response.rcontent}"> </p>
                         </div>
                     </div>
 <!--                    {% endfor %}-->

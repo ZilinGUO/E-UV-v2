@@ -21,15 +21,16 @@
         <div class="wrapper wrapper-content animated fadeInUp">
             <ul class="notes">
 <!--               循环拿标签 -->
-                <li>
+                <li th:each="evaluation:${evaluationList}">
                     <div>
-                        <small>创建时间</small>
-                        <h4>创建标题</h4>
-                        <p>描述</p>
+                        <small th:text="${evaluation.ecreated}"></small>
+                        <h4 th:text="${evaluation.etitle}"></h4>
+                        <p th:text="${evaluation.edesp}"></p>
 <!--                       进入详情页面 -->
-                        <a href="#" onclick="gotoDetailPage()"><i class="fa fa-trash-o "></i></a>
+                        <a href="#" th:onclick="'gotoDetailPage(\'' + ${evaluation.eid} + '\');'" ><i class="fa fa-trash-o "></i></a>
                     </div>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -41,7 +42,7 @@
 <script src="/js/plugins/layer/layer.min.js"></script>
 <!-- 自定义js -->
 <script src="/js/hAdmin.js?v=4.1.0"></script>
-<script type="text/javascript" src="/js/homePage.js"></script>
+<!--<script type="text/javascript" src="/js/homePage.js"></script>-->
 <script src="/js/plugins/pace/pace.min.js"></script>
 <script src="/js/evaluation/getEvaluation.js"></script>
 

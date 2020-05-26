@@ -248,4 +248,8 @@
       rstudent_id = #{rstudentId,jdbcType=INTEGER}
     where rid = #{rid,jdbcType=INTEGER}
   </update>
+  <select id="getResponseByEvaluationId"  resultType="java.util.Map">
+    select r.*,u.user_name from t_response r inner join t_user u on r.rstudent_id =u.id where revaluation_id = #{eid}
+  </select>
+
 </mapper>

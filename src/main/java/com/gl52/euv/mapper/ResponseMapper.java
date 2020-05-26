@@ -3,6 +3,8 @@ package com.gl52.euv.mapper;
 import com.gl52.euv.pojo.Response;
 import com.gl52.euv.pojo.ResponseExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ResponseMapper {
@@ -33,4 +35,6 @@ public interface ResponseMapper {
     int updateByPrimaryKeyWithBLOBs(Response record);
 
     int updateByPrimaryKey(Response record);
+
+    List<Map<String, Object>> getResponseByEvaluationId(@Param("eid") Integer eid);
 }
