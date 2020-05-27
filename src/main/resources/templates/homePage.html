@@ -49,18 +49,20 @@
 							<li><a class="J_menuItem" href="/groups.html">Gestion des groupes</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li th:switch = "${role}">
                         <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Gestion évaluations</span><span class="fa arrow"></span></a>
-
-
-                        <ul class="nav nav-second-level" th:switch = "${role}">
-                            <li th:case="0">
-                                <a class="J_menuItem" href="/Evaluation/findAllEvaluation.do">Mes évaluations</a>
-                            </li>
-                            <li th:case="1">
+                        <ul class="nav nav-second-level" th:case="0">
+                                <li >
+                                    <a  class="J_menuItem" href="/Evaluation/findAllEvaluation.do">Mes évaluations</a>
+                                </li>
+                                <li >
+                                    <a class="J_menuItem" href="/evaluation/setEvaluation.html">Proposer évaluations</a>
+                                </li >
+                        </ul>
+                        <ul class="nav nav-second-level" th:case="1">
+                            <li >
                                 <a class="J_menuItem" href="/Evaluation/upateAndfindAllEvaluation.do">Répondre évaluations</a>
                             </li >
-<!--                            <li th:case="1"><a class="J_menuItem" href="/evaluation/setEvaluation.html">Proposer évaluations</a>-->
                         </ul>
                     </li>
                     <li>
