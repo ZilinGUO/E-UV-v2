@@ -38,4 +38,6 @@ public interface GroupMapper {
 
     int updateByPrimaryKey(Group record);
     List<Map<String, Object>> selectByPageIndex(@Param("offset")  Integer offset, @Param("limit")  Integer limit);
+
+
 }

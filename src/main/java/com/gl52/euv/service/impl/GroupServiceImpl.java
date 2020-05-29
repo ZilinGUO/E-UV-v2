@@ -1,7 +1,6 @@
 package com.gl52.euv.service.impl;
 
 import com.gl52.euv.mapper.GroupMapper;
-import com.gl52.euv.mapper.UserMapper;
 import com.gl52.euv.pojo.Group;
 import com.gl52.euv.pojo.GroupExample;
 import com.gl52.euv.pojo.User;
@@ -63,13 +62,35 @@ public class GroupServiceImpl implements GroupService {
 
     @Transactional(readOnly=true)
     @Override
-    public Group enterGroup(int userId) {
+    public HashMap getGroupByUserId(int userId) {
         if(!userService.isHasGroup(userId)){
             return null;
         }else{
+            HashMap hashMap=new HashMap();
             int groupId=userService.getGroupId(userId);
             Group group=groupMapper.selectByPrimaryKey(groupId);
-            return group;
+            List<User> users=userService.getUserByGroupId(groupId);
+            hashMap.put("group",group);
+            hashMap.put("users",users);
+            return hashMap;
         }
+    }
+
+    @Transactional(readOnly=true)
+    @Override
+    public HashMap getGroupByGroupId(int groupId) {
+        HashMap hashMap=new HashMap();
+        Group group=groupMapper.selectByPrimaryKey(groupId);
+        List<User> users=userService.getUserByGroupId(groupId);
+        hashMap.put("group",group);
+        hashMap.put("users",users);
+        return hashMap;
+    }
+
+    @Override
+    public void saveFichier(String originalFilename, byte[] data, int groupId) {
+        Group group=groupMapper.selectByPrimaryKey(groupId);
+        group.setFile(data);
+
     }
 }

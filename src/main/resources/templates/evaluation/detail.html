@@ -22,10 +22,13 @@
             <div class="text-center article-title">
                 <h1 th:text="${evaluation.etitle}"></h1>
             </div>
+
             <div>
                 <dl class="dl-horizontal">
                     <dt>Temps de creation：</dt>
                     <dd th:text="${evaluation.ecreated}"></dd>
+                    <dt>date limite：</dt>
+                    <dd th:inline="text">[[${evaluation.eduration}]]</dd>
                     <dt >Description：</dt>
                     <dd th:text="${evaluation.edesp}">
                     </dd>
@@ -40,6 +43,7 @@
                             <span class="label label-danger">Fermé</span>
                         </dd>
                     </div>
+
 
 <!--                    {% endif %}-->
                 </dl>

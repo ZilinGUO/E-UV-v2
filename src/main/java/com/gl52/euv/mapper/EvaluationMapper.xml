@@ -5,7 +5,7 @@
     <id column="eid" jdbcType="INTEGER" property="eid" />
     <result column="etitle" jdbcType="VARCHAR" property="etitle" />
     <result column="edesp" jdbcType="VARCHAR" property="edesp" />
-    <result column="eduration" jdbcType="INTEGER" property="eduration" />
+    <result column="eduration" jdbcType="TIMESTAMP" property="eduration" />
     <result column="ecreated" jdbcType="TIMESTAMP" property="ecreated" />
     <result column="evaild" jdbcType="BIT" property="evaild" />
   </resultMap>
@@ -129,7 +129,7 @@
       eduration, ecreated, evaild, 
       econtent)
     values (#{eid,jdbcType=INTEGER}, #{etitle,jdbcType=VARCHAR}, #{edesp,jdbcType=VARCHAR}, 
-      #{eduration,jdbcType=INTEGER}, #{ecreated,jdbcType=TIMESTAMP}, #{evaild,jdbcType=BIT}, 
+      #{eduration,jdbcType=TIMESTAMP}, #{ecreated,jdbcType=TIMESTAMP}, #{evaild,jdbcType=BIT}, 
       #{econtent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gl52.euv.pojo.Evaluation">
@@ -168,7 +168,7 @@
         #{edesp,jdbcType=VARCHAR},
       </if>
       <if test="eduration != null">
-        #{eduration,jdbcType=INTEGER},
+        #{eduration,jdbcType=TIMESTAMP},
       </if>
       <if test="ecreated != null">
         #{ecreated,jdbcType=TIMESTAMP},
@@ -200,7 +200,7 @@
         edesp = #{record.edesp,jdbcType=VARCHAR},
       </if>
       <if test="record.eduration != null">
-        eduration = #{record.eduration,jdbcType=INTEGER},
+        eduration = #{record.eduration,jdbcType=TIMESTAMP},
       </if>
       <if test="record.ecreated != null">
         ecreated = #{record.ecreated,jdbcType=TIMESTAMP},
@@ -221,7 +221,7 @@
     set eid = #{record.eid,jdbcType=INTEGER},
       etitle = #{record.etitle,jdbcType=VARCHAR},
       edesp = #{record.edesp,jdbcType=VARCHAR},
-      eduration = #{record.eduration,jdbcType=INTEGER},
+      eduration = #{record.eduration,jdbcType=TIMESTAMP},
       ecreated = #{record.ecreated,jdbcType=TIMESTAMP},
       evaild = #{record.evaild,jdbcType=BIT},
       econtent = #{record.econtent,jdbcType=LONGVARCHAR}
@@ -234,7 +234,7 @@
     set eid = #{record.eid,jdbcType=INTEGER},
       etitle = #{record.etitle,jdbcType=VARCHAR},
       edesp = #{record.edesp,jdbcType=VARCHAR},
-      eduration = #{record.eduration,jdbcType=INTEGER},
+      eduration = #{record.eduration,jdbcType=TIMESTAMP},
       ecreated = #{record.ecreated,jdbcType=TIMESTAMP},
       evaild = #{record.evaild,jdbcType=BIT}
     <if test="_parameter != null">
@@ -251,7 +251,7 @@
         edesp = #{edesp,jdbcType=VARCHAR},
       </if>
       <if test="eduration != null">
-        eduration = #{eduration,jdbcType=INTEGER},
+        eduration = #{eduration,jdbcType=TIMESTAMP},
       </if>
       <if test="ecreated != null">
         ecreated = #{ecreated,jdbcType=TIMESTAMP},
@@ -269,7 +269,7 @@
     update t_evaluation
     set etitle = #{etitle,jdbcType=VARCHAR},
       edesp = #{edesp,jdbcType=VARCHAR},
-      eduration = #{eduration,jdbcType=INTEGER},
+      eduration = #{eduration,jdbcType=TIMESTAMP},
       ecreated = #{ecreated,jdbcType=TIMESTAMP},
       evaild = #{evaild,jdbcType=BIT},
       econtent = #{econtent,jdbcType=LONGVARCHAR}
@@ -279,7 +279,7 @@
     update t_evaluation
     set etitle = #{etitle,jdbcType=VARCHAR},
       edesp = #{edesp,jdbcType=VARCHAR},
-      eduration = #{eduration,jdbcType=INTEGER},
+      eduration = #{eduration,jdbcType=TIMESTAMP},
       ecreated = #{ecreated,jdbcType=TIMESTAMP},
       evaild = #{evaild,jdbcType=BIT}
     where eid = #{eid,jdbcType=INTEGER}

@@ -29,4 +29,5 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByNameAndPassword(@Param("userName")String userName, @Param("password")String password);
+    List<User> selectByGroupId(@Param("groupId")Integer groupId);
 }

@@ -26,7 +26,7 @@ $(document).ready(function(){
         async: false,//是否异步请求
         success: function (data) {
             if(data!=null&&data.role==1){
-
+                 $('#enterGroup').hide();
             }else if(data!=null&&data.role==0){
                 $('#joinGroup').hide();
                 $('#creatGroup').hide();
@@ -173,5 +173,7 @@ function joinGroup() {
 }
 
 function enterMyGroup() {
-    window.parent.document.getElementById("J_iframe").setAttribute('src',"/Group/groupPage.do");
+    var row=$("#table").bootstrapTable('getSelections');
+    console.log(row[0].subjectid);
+    window.parent.document.getElementById("J_iframe").setAttribute('src',"/Group/groupPage.do?groupId="+row[0].groupId);
 }

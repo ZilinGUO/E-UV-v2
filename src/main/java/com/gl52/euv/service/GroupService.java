@@ -1,7 +1,6 @@
 package com.gl52.euv.service;
 
-import com.gl52.euv.pojo.Group;
-
+import java.util.HashMap;
 import java.util.Map;
 
 public interface GroupService {
@@ -11,5 +10,9 @@ public interface GroupService {
 
     boolean joinGroup(int groupId, int userId);
 
-    Group enterGroup(int userId);
+    HashMap getGroupByUserId(int userId);
+
+    HashMap getGroupByGroupId(int groupId);
+
+    void saveFichier(String originalFilename, byte[] data, int groupId);
 }

@@ -315,52 +315,52 @@ public class EvaluationExample {
             return (Criteria) this;
         }
 
-        public Criteria andEdurationEqualTo(Integer value) {
+        public Criteria andEdurationEqualTo(Date value) {
             addCriterion("eduration =", value, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationNotEqualTo(Integer value) {
+        public Criteria andEdurationNotEqualTo(Date value) {
             addCriterion("eduration <>", value, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationGreaterThan(Integer value) {
+        public Criteria andEdurationGreaterThan(Date value) {
             addCriterion("eduration >", value, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationGreaterThanOrEqualTo(Integer value) {
+        public Criteria andEdurationGreaterThanOrEqualTo(Date value) {
             addCriterion("eduration >=", value, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationLessThan(Integer value) {
+        public Criteria andEdurationLessThan(Date value) {
             addCriterion("eduration <", value, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationLessThanOrEqualTo(Integer value) {
+        public Criteria andEdurationLessThanOrEqualTo(Date value) {
             addCriterion("eduration <=", value, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationIn(List<Integer> values) {
+        public Criteria andEdurationIn(List<Date> values) {
             addCriterion("eduration in", values, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationNotIn(List<Integer> values) {
+        public Criteria andEdurationNotIn(List<Date> values) {
             addCriterion("eduration not in", values, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationBetween(Integer value1, Integer value2) {
+        public Criteria andEdurationBetween(Date value1, Date value2) {
             addCriterion("eduration between", value1, value2, "eduration");
             return (Criteria) this;
         }
 
-        public Criteria andEdurationNotBetween(Integer value1, Integer value2) {
+        public Criteria andEdurationNotBetween(Date value1, Date value2) {
             addCriterion("eduration not between", value1, value2, "eduration");
             return (Criteria) this;
         }

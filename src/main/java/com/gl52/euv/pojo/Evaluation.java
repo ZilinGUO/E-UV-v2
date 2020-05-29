@@ -10,7 +10,7 @@ public class Evaluation implements Serializable {
 
     private String edesp;
 
-    private Integer eduration;
+    private Date eduration;
 
     private Date ecreated;
 
@@ -44,11 +44,11 @@ public class Evaluation implements Serializable {
         this.edesp = edesp == null ? null : edesp.trim();
     }
 
-    public Integer getEduration() {
+    public Date getEduration() {
         return eduration;
     }
 
-    public void setEduration(Integer eduration) {
+    public void setEduration(Date eduration) {
         this.eduration = eduration;
     }
 

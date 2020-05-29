@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +32,11 @@ public class EvaluationController  {
      * @throws Exception
      */
     @RequestMapping(value="/createEvaluation.do", method= RequestMethod.POST)
-    public  String requestList(@RequestParam Map<String, Object> map, HttpSession httpSession,Map<String, Object> param) {
+    public  String requestList(@RequestParam Map<String, Object> map, HttpSession httpSession,Map<String, Object> param) throws ParseException {
         String etitle = map.get("etitle").toString();
         String edescp = map.get("edescp").toString();
-        int eduration = Integer.parseInt(map.get("eduration").toString());
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date eduration =  simpleDateFormat.parse(map.get("eduration1").toString());
         String econtent= map.get("econtent").toString();
         try {
            if(evaluationService.createEvaluation(etitle,edescp,eduration,econtent)) {
@@ -39,7 +44,6 @@ public class EvaluationController  {
                return "/evaluation/setEvaluation";
            }
             param.put("msg","La création a échoué, veuillez contacter l\'administrateur");
-//            System.out.println(i);
             return "/evaluation/setEvaluation";
         }   catch (Exception e) {
             e.printStackTrace();

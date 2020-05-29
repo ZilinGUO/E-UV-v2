@@ -24,7 +24,7 @@ public class EvaluationServiceImpl implements EvaluationService {
     @Autowired
     private ResponseService responseService;
     @Override
-    public boolean createEvaluation(String etitle, String edescp, int eduration, String econtent) {
+    public boolean createEvaluation(String etitle, String edescp, Date eduration, String econtent) {
         Evaluation evaluation= new Evaluation();
         evaluation.setEtitle(etitle);
         evaluation.setEdesp(edescp);
@@ -43,10 +43,14 @@ public class EvaluationServiceImpl implements EvaluationService {
         EvaluationExample example=new EvaluationExample();
         return evaluationMapper.selectByExample(example);
     }
-
+    @Transactional
     @Override
     public HashMap getAnEvaluationAndReponse(int eid) {
         Evaluation evaluation= evaluationMapper.selectByPrimaryKey(eid);
+        if (!testState(evaluation.getEduration())) {
+            evaluation.setEvaild(false);
+            evaluationMapper.updateByPrimaryKeySelective(evaluation);
+        };
         List<Map<String, Object>> responses=responseService.getResponseByEvaluationId(eid);
         HashMap hashMap=new HashMap<String,Object>();
         hashMap.put("evaluation",evaluation);
@@ -59,7 +63,7 @@ public class EvaluationServiceImpl implements EvaluationService {
         List<Evaluation> evaluations=getAllEvaluation();
         for(Evaluation evaluation:evaluations){
             if(evaluation.getEvaild()) {
-                if (!testState(evaluation.getEcreated(), evaluation.getEduration())) {
+                if (!testState( evaluation.getEduration())) {
                     evaluation.setEvaild(false);
                     evaluationMapper.updateByPrimaryKeySelective(evaluation);
                 }
@@ -69,15 +73,8 @@ public class EvaluationServiceImpl implements EvaluationService {
     }
 
     @Override
-    public Boolean testState(Date createTime, int duration) {
-        long nd = 1000 * 24 * 60 * 60;
-        long nh = 1000 * 60 * 60;
-        Date currentTime=new Date();
-        long diff = currentTime.getTime() - createTime.getTime();
-        long day = diff / nd;
-        long hour = diff % nd / nh+ day * 24;
-        if(hour>duration)return false;
-        return true;
+    public Boolean testState(Date duration) {
+        return new Date().getTime() - duration.getTime()>0?false:true;
     }
 
     @Override

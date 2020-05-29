@@ -214,4 +214,11 @@
     where
     t.user_name =#{userName} and t.password=#{password}
   </select>
+  <select id="selectByGroupId" resultMap="BaseResultMap">
+    select t.user_name
+    from t_user t
+    where
+    t.groupId=#{groupId}
+  </select>
+
 </mapper>

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface EvaluationService {
-    boolean createEvaluation(String etitle, String edescp, int eduration, String econtent);
+    boolean createEvaluation(String etitle, String edescp, Date eduration, String econtent);
 
     List<Evaluation> getAllEvaluation();
 
@@ -15,7 +15,7 @@ public interface EvaluationService {
 
     List<Evaluation> upateAndfindAllEvaluation();
 
-    Boolean testState(Date createTime,int duration);
+    Boolean testState(Date duration);
 
     Evaluation getEvaluationById(int id);
 }

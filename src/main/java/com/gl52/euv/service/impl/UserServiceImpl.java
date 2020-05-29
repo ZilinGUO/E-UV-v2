@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * 用户管理业务层
  */
@@ -44,6 +46,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int getGroupId(int userId) {
         return userMapper.selectByPrimaryKey(userId).getGroupid();
+    }
+
+    @Override
+    public List<User> getUserByGroupId(int groupId) {
+        return userMapper.selectByGroupId(groupId);
     }
 
 

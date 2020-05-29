@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -96,20 +102,91 @@ public class GroupController {
      * @throws Exception
      */
     @RequestMapping("/groupPage.do")
-    public String groupPage ( HttpSession session,Map<String, Object> map,@PathVariable String param) throws Exception {
-        int userId= (int) session.getAttribute("userId");
+    public String groupPage ( HttpSession session,@RequestParam Map<String, Object> map,Map<String, Object> param) throws Exception {
+        System.out.println(map);
         try {
-            Group group=groupService.enterGroup(userId);
-            if(group==null){
-                map.put("msg","you don\'t have a group");
-                return "groups";
+            HashMap hashMap=null;
+            if(map.size()!=0){
+                int groupId = Integer.parseInt(map.get("groupId").toString());
+                hashMap=groupService.getGroupByGroupId(groupId);
+            }else{
+                int userId= (int) session.getAttribute("userId");
+                 hashMap=groupService.getGroupByUserId(userId);
             }
-
-            return "groups";
+            if(hashMap.isEmpty()){
+                param.put("msg","you don\'t have a group");
+                param.put("hasGroup",false);
+                return "/group/group";
+            }else {
+                param.put("hasGroup",true);
+                param.put("hashMap",hashMap);
+                return "/group/group";
+            }
         }   catch (Exception e) {
             e.printStackTrace();
             return  null;
         }
+    };
+    /**
+     * upload file
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping({"/uploadFicher.do"})
+    public void uploadFicher(MultipartHttpServletRequest request, HttpServletResponse response,@RequestParam String groupId) throws Exception {
+//        String fillType = request.getParameter("file");
+        PrintWriter writer = response.getWriter();
+        InputStream in = null;
+        try {
+            int groupID=Integer.parseInt(groupId);
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+            Map.Entry<String, MultipartFile> entry = fileMap.entrySet().iterator().next();
+            MultipartFile multipartFile =  entry.getValue();
+            in = multipartFile.getInputStream();
+            byte[] data = multipartFile.getBytes();
+//            commonsMultipartFile.getFileItem().getName();
+            in.read(data);
+            groupService.saveFichier(multipartFile.getOriginalFilename(),data,groupID);
+        } catch (Exception e) {
+            System.out.println("上传失败，请联系管理员检查。");
+        } finally {
+            try {
+                // 关闭输入流
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+//    @RequestMapping({"/uploadFicher.do"})
+//        public void uploadFicher(@RequestParam("file") CommonsMultipartFile commonsMultipartFile, HttpServletResponse response) throws Exception {
+////        String fillType = request.getParameter("file");
+//        PrintWriter writer = response.getWriter();
+//        InputStream in = null;
+//        try {
+////            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+////            Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+////            Map.Entry<String, MultipartFile> entry = fileMap.entrySet().iterator().next();
+////            CommonsMultipartFile commonsMultipartFile = (CommonsMultipartFile) file;
+////            ((CommonsMultipartFile) file).getFileItem();
+//            in = commonsMultipartFile.getInputStream();
+//            byte[] data = commonsMultipartFile.getBytes();
+//            String name=file.getOriginalFilename();
+//            in.read(data);
+////            groupService.saveFichier(commonsMultipartFile.getFileItem().getName(),data)
+//        } catch (Exception e) {
+//            System.out.println("上传失败，请联系管理员检查。");
+//        } finally {
+//            try {
+//                // 关闭输入流
+//                in.close();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 }
