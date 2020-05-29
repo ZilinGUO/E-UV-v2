@@ -1,6 +1,5 @@
 package com.gl52.euv.service.impl;
 
-import com.gl52.euv.dao.UserDao;
 import com.gl52.euv.mapper.UserMapper;
 import com.gl52.euv.pojo.User;
 import com.gl52.euv.service.UserService;

@@ -3,8 +3,10 @@ package com.gl52.euv.service.impl;
 import com.gl52.euv.mapper.GroupMapper;
 import com.gl52.euv.pojo.Group;
 import com.gl52.euv.pojo.GroupExample;
+import com.gl52.euv.pojo.Meeting;
 import com.gl52.euv.pojo.User;
 import com.gl52.euv.service.GroupService;
+import com.gl52.euv.service.MeetingService;
 import com.gl52.euv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,8 @@ public class GroupServiceImpl implements GroupService {
     private GroupMapper groupMapper;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private MeetingService meetingService ;
     @Override
     public Map<String, Object> getAllGroups(Map<String, Object> param) {
         GroupExample example=new GroupExample();
@@ -44,7 +47,7 @@ public class GroupServiceImpl implements GroupService {
             group.setProjectmanager(userId);
             group.setGroupname(groupName);
             group.setIsValid(0);
-            groupMapper.insertSelective(group);
+            int groupId=groupMapper.insertSelective(group);
             userService.insertGroupId(userId,group.getGroupid());
             return group.getGroupid();
         }
@@ -70,8 +73,10 @@ public class GroupServiceImpl implements GroupService {
             int groupId=userService.getGroupId(userId);
             Group group=groupMapper.selectByPrimaryKey(groupId);
             List<User> users=userService.getUserByGroupId(groupId);
+            Meeting meeting=meetingService.getLastMeeting(groupId);
             hashMap.put("group",group);
             hashMap.put("users",users);
+            hashMap.put("meeting",meeting);
             return hashMap;
         }
     }
@@ -82,15 +87,19 @@ public class GroupServiceImpl implements GroupService {
         HashMap hashMap=new HashMap();
         Group group=groupMapper.selectByPrimaryKey(groupId);
         List<User> users=userService.getUserByGroupId(groupId);
+        Meeting meeting=meetingService.getLastMeeting(groupId);
         hashMap.put("group",group);
         hashMap.put("users",users);
+        hashMap.put("meeting",meeting);
         return hashMap;
     }
 
+    @Transactional
     @Override
     public void saveFichier(String originalFilename, byte[] data, int groupId) {
         Group group=groupMapper.selectByPrimaryKey(groupId);
         group.setFile(data);
-
+        group.setFilename(originalFilename);
+        groupMapper.updateByPrimaryKeyWithBLOBs(group);
     }
 }

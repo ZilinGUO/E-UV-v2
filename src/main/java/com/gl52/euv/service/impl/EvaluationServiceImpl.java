@@ -5,6 +5,7 @@ import com.gl52.euv.pojo.Evaluation;
 import com.gl52.euv.pojo.EvaluationExample;
 import com.gl52.euv.pojo.Response;
 import com.gl52.euv.service.EvaluationService;
+import com.gl52.euv.service.MeetingService;
 import com.gl52.euv.service.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class EvaluationServiceImpl implements EvaluationService {
 
     @Autowired
     private ResponseService responseService;
+
+
     @Override
     public boolean createEvaluation(String etitle, String edescp, Date eduration, String econtent) {
         Evaluation evaluation= new Evaluation();

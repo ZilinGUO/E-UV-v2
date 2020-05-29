@@ -16,7 +16,7 @@ function check(form) {
         alert('Le nombre minimum de personnes doit être supérieur au maximum');
         return;
     }
-    var gnl=confirm("确定要提交?");
+    var gnl=confirm("Sure to submit?");
     if (gnl==true){
         $('#form').submit();
     }else{

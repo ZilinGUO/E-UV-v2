@@ -25,11 +25,10 @@
                 <div class="text-center article-title">
                     <h1 th:text="${msg}"></h1>
                 </div>
-
             </div>
         </div>
     </div>
-<div class="col-lg-10 col-lg-offset-1" th:case="true">
+    <div class="col-lg-10 col-lg-offset-1" th:case="true">
         <div class="ibox">
             <div class="ibox-content">
                 <div class="text-center article-title">
@@ -41,14 +40,43 @@
                         <dd th:text="${user.userName}"></dd>
                     </dl>
                 </div>
+                <div>
+                    <dl class="dl-horizontal" >
+                        <dt>rendez-vous：</dt >
+                        <dd th:text="${hashMap.meeting.mdate}" th:if="${not #strings.isEmpty(hashMap.meeting)}"></dd>
+                    </dl>
+                </div>
+                <div >
+                    <dl class="dl-horizontal">
+                        <dt>Fichier：</dt >
+                        <a id="fileName" onclick="exportFile()" th:text="${hashMap.group.filename}" th:if="${not #strings.isEmpty(hashMap.group.filename)}"></a>
+<!--                        <dd th:text="${user.userName}"></dd>-->
+                    </dl>
+                </div>
             </div>
-<!--            <input id="input-ke-2" name="photo" type="file" multiple>-->
-<!--            <input id="input-id" type="file" class="file" data-preview-file-type="text" >-->
-            <div class="text-center article-title">
-                <input type="file" name="file"  id="uploadfile" class="imgFile form-control">
+            <div class="ibox-content" id="meetingBox">
+                <label>Proposer un rendez-vous</label>
+                <!--指定 date标记-->
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' class="form-control" placeholder="Sélectionner la date et l'heure" required="true"  id="mDate" />
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+                <p></p>
+                <button class="btn btn-sm btn-primary  m-t-n-xs" onclick="setMeeting()">
+                    <strong>Publier</strong>
+                </button>
+            </div>
+            <div class="ibox-content" id="uploadfileBox">
+                <div class="text-center article-title">
+                    <h2>Ajouter un travail：</h2>
+                    <input type="file" name="file"  id="uploadfile" class="imgFile form-control">
+                    <input type="hidden" name ="msg" id="msg" />
+                </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 <script src="/js/jquery.min.js?v=2.1.4"></script>
 <script src="/js/bootstrap.min.js?v=3.3.6"></script>
@@ -58,6 +86,8 @@
 <!-- 自定义js -->
 <script src="/js/hAdmin.js?v=4.1.0"></script>
 <!--<script type="text/javascript" src="/js/homePage.js"></script>-->
+<script src="/js/bootstrap/moment.js"></script>
+<script src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/plugins/pace/pace.min.js"></script>
 <script src="/js/bootstrap/piexif.min.js"></script>
 <script src="/js/bootstrap/sortable.min.js"></script>
@@ -67,10 +97,13 @@
 <script src="/js/bootstrap/theme.js"></script>
 <script th:inline="javascript">
 
-    window.groupId= [[${hashMap.group.groupid}]]
-</script>
+    var hasgroup=[[${hasGroup}]]
+    if(hasgroup==true){
+        window.groupId= [[${hashMap.group.groupid}]];
+    }
 
-            <script src="/js/group/group.js"></script>
+</script>
+<script src="/js/group/group.js"></script>
 
 
 

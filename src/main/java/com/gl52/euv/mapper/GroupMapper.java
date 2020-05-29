@@ -2,8 +2,6 @@ package com.gl52.euv.mapper;
 
 import com.gl52.euv.pojo.Group;
 import com.gl52.euv.pojo.GroupExample;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +35,6 @@ public interface GroupMapper {
     int updateByPrimaryKeyWithBLOBs(Group record);
 
     int updateByPrimaryKey(Group record);
+
     List<Map<String, Object>> selectByPageIndex(@Param("offset")  Integer offset, @Param("limit")  Integer limit);
-
-
 }

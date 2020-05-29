@@ -94,22 +94,23 @@ $(document).ready(function(){
                 value=row.total+'/( '+row.number_min+'~'+row.number_max+' )'
                 return value;
         }
-        },{
-            field:'is_valid',  //返回json中的name
-            title:'valide',   //表格表头显示文字
-            halign:'center',
-            align:'center',   //左右居中
-            valign: 'middle' ,// 上下居中
-            formatter:function(value,row,index){
-                var value="";
-                if(row.is_valid=="0"){
-                    value = "Non";
-                }else{
-                    value = "Oui";
-                };
-                return value;
-            }
-        }
+        },
+        //     {
+        //     field:'is_valid',  //返回json中的name
+        //     title:'valide',   //表格表头显示文字
+        //     halign:'center',
+        //     align:'center',   //左右居中
+        //     valign: 'middle' ,// 上下居中
+        //     formatter:function(value,row,index){
+        //         var value="";
+        //         if(row.is_valid=="0"){
+        //             value = "Non";
+        //         }else{
+        //             value = "Oui";
+        //         };
+        //         return value;
+        //     }
+        // }
         ]
     });
 
@@ -174,6 +175,13 @@ function joinGroup() {
 
 function enterMyGroup() {
     var row=$("#table").bootstrapTable('getSelections');
-    console.log(row[0].subjectid);
+    if(row==null||row.length==0){
+        alert('choose a group first');
+        return;
+    }
+    if(row.length!=1){
+        alert('choose one group');
+        return;
+    }
     window.parent.document.getElementById("J_iframe").setAttribute('src',"/Group/groupPage.do?groupId="+row[0].groupId);
 }

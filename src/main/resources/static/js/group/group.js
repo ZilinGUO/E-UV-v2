@@ -1,21 +1,48 @@
 $(document).ready(function(){
-console.log(groupId);
-    // var groupId=$('#groupid').val();
-    // $("#uploadfile").fileinput();
+    $.ajax({
+        url: "/User/getUserInfo.do",
+        type: "post",
+        data: {},
+        async: false,//是否异步请求
+        success: function (data) {
+            if(data!=null&&data.role==1){
+                $('#meetingBox').hide();
+            }else if(data!=null&&data.role==0){
+                $('#uploadfileBox').hide();
+            }
+        }
 
-// with plugin options
-// $("#input-id").fileinput({'showUpload':false, 'previewFileType':'any'});
+    })
+    
+    
+
+    $('#datetimepicker1').datetimepicker({
+
+        format: 'YYYY-MM-DD',
+
+        locale: moment.locale('zh-cn')
+
+    });
+
+    $('#datetimepicker2').datetimepicker({
+
+        format: 'YYYY-MM-DD hh:mm',
+
+        locale: moment.locale('zh-cn')
+
+    });
+
     $("#uploadfile").fileinput({
 
         language: 'en', //设置语言
 
-        uploadUrl:"/Group/uploadFicher.do?groupId="+groupId, //上传的地址
+        uploadUrl:"/Group/uploadFile.do?groupId="+groupId, //上传的地址
 
         allowedFileExtensions: ['pdf', 'gif', 'png'],//接收的文件后缀
 
         //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
 
-        uploadAsync: true, //默认异步上传
+        uploadAsync: false, //默认异步上传
 
         showUpload:true, //是否显示上传按钮
 
@@ -51,9 +78,37 @@ console.log(groupId);
 
         msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
 
-    }).on("fileuploaded", function (event, data, previewId, index){
+    }).on("filebatchuploadsuccess", function(event,data,previewId,index) {
+        debugger;
+        if(data.response){
+            $("#fileName").text(data.response.fileName);
+            alert(data.response.message);
+            window.location.reload();
 
-
-
-    });
+        }
+        // console.log(data.response.message);
+        });
 });
+function  exportFile(){
+     window.location.href="/Group/exportFile.do?groupId="+groupId;
+
+}
+function setMeeting() {
+    json={};
+    json.groupId=window.groupId
+    json.mDate=$('#mDate').val();
+    $.ajax({
+        url: "/Meeting/setMeeting.do",
+        type: "get",
+        data: json,
+        async: false,//是否异步请求
+        success: function (data) {
+            var jsonObj =  JSON.parse(data);
+            if(jsonObj&&jsonObj.msg){
+                alert("Propose dating success");
+                window.location.reload();
+            }
+        }
+
+    })
+}

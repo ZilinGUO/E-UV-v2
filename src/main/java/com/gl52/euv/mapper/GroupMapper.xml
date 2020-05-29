@@ -7,6 +7,7 @@
     <result column="projectManager" jdbcType="INTEGER" property="projectmanager" />
     <result column="subjectId" jdbcType="INTEGER" property="subjectid" />
     <result column="is_valid" jdbcType="INTEGER" property="isValid" />
+    <result column="fileName" jdbcType="VARCHAR" property="filename" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gl52.euv.pojo.Group">
     <result column="file" jdbcType="LONGVARBINARY" property="file" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    groupId, groupName, projectManager, subjectId, is_valid
+    groupId, groupName, projectManager, subjectId, is_valid, fileName
   </sql>
   <sql id="Blob_Column_List">
     file
@@ -106,7 +107,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -124,14 +125,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gl52.euv.pojo.Group">
-    insert into t_group (groupId, groupName, projectManager, 
-      subjectId, is_valid, file
-      )
-    values (#{groupid,jdbcType=INTEGER}, #{groupname,jdbcType=VARCHAR}, #{projectmanager,jdbcType=INTEGER}, 
-      #{subjectid,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, #{file,jdbcType=LONGVARBINARY}
-      )
+    insert into t_group (groupId, groupName, projectManager,
+      subjectId, is_valid, fileName,
+      file)
+    values (#{groupid,jdbcType=INTEGER}, #{groupname,jdbcType=VARCHAR}, #{projectmanager,jdbcType=INTEGER},
+      #{subjectid,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR},
+      #{file,jdbcType=LONGVARBINARY})
   </insert>
-  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="groupid" parameterType="com.gl52.euv.pojo.Group">
+  <insert id="insertSelective" parameterType="com.gl52.euv.pojo.Group" useGeneratedKeys="true" keyProperty="groupid">
     insert into t_group
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="groupid != null">
@@ -148,6 +149,9 @@
       </if>
       <if test="isValid != null">
         is_valid,
+      </if>
+      <if test="filename != null">
+        fileName,
       </if>
       <if test="file != null">
         file,
@@ -168,6 +172,9 @@
       </if>
       <if test="isValid != null">
         #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
       </if>
       <if test="file != null">
         #{file,jdbcType=LONGVARBINARY},
@@ -198,6 +205,9 @@
       <if test="record.isValid != null">
         is_valid = #{record.isValid,jdbcType=INTEGER},
       </if>
+      <if test="record.filename != null">
+        fileName = #{record.filename,jdbcType=VARCHAR},
+      </if>
       <if test="record.file != null">
         file = #{record.file,jdbcType=LONGVARBINARY},
       </if>
@@ -213,6 +223,7 @@
       projectManager = #{record.projectmanager,jdbcType=INTEGER},
       subjectId = #{record.subjectid,jdbcType=INTEGER},
       is_valid = #{record.isValid,jdbcType=INTEGER},
+      fileName = #{record.filename,jdbcType=VARCHAR},
       file = #{record.file,jdbcType=LONGVARBINARY}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,7 +235,8 @@
       groupName = #{record.groupname,jdbcType=VARCHAR},
       projectManager = #{record.projectmanager,jdbcType=INTEGER},
       subjectId = #{record.subjectid,jdbcType=INTEGER},
-      is_valid = #{record.isValid,jdbcType=INTEGER}
+      is_valid = #{record.isValid,jdbcType=INTEGER},
+      fileName = #{record.filename,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -244,6 +256,9 @@
       <if test="isValid != null">
         is_valid = #{isValid,jdbcType=INTEGER},
       </if>
+      <if test="filename != null">
+        fileName = #{filename,jdbcType=VARCHAR},
+      </if>
       <if test="file != null">
         file = #{file,jdbcType=LONGVARBINARY},
       </if>
@@ -256,6 +271,7 @@
       projectManager = #{projectmanager,jdbcType=INTEGER},
       subjectId = #{subjectid,jdbcType=INTEGER},
       is_valid = #{isValid,jdbcType=INTEGER},
+      fileName = #{filename,jdbcType=VARCHAR},
       file = #{file,jdbcType=LONGVARBINARY}
     where groupId = #{groupid,jdbcType=INTEGER}
   </update>
@@ -264,7 +280,8 @@
     set groupName = #{groupname,jdbcType=VARCHAR},
       projectManager = #{projectmanager,jdbcType=INTEGER},
       subjectId = #{subjectid,jdbcType=INTEGER},
-      is_valid = #{isValid,jdbcType=INTEGER}
+      is_valid = #{isValid,jdbcType=INTEGER},
+      fileName = #{filename,jdbcType=VARCHAR}
     where groupId = #{groupid,jdbcType=INTEGER}
   </update>
   <select id="selectByPageIndex" resultType="java.util.Map">

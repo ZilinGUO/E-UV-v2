@@ -413,6 +413,76 @@ public class GroupExample {
             addCriterion("is_valid not between", value1, value2, "isValid");
             return (Criteria) this;
         }
+
+        public Criteria andFilenameIsNull() {
+            addCriterion("fileName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameIsNotNull() {
+            addCriterion("fileName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameEqualTo(String value) {
+            addCriterion("fileName =", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameNotEqualTo(String value) {
+            addCriterion("fileName <>", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameGreaterThan(String value) {
+            addCriterion("fileName >", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameGreaterThanOrEqualTo(String value) {
+            addCriterion("fileName >=", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameLessThan(String value) {
+            addCriterion("fileName <", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameLessThanOrEqualTo(String value) {
+            addCriterion("fileName <=", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameLike(String value) {
+            addCriterion("fileName like", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameNotLike(String value) {
+            addCriterion("fileName not like", value, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameIn(List<String> values) {
+            addCriterion("fileName in", values, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameNotIn(List<String> values) {
+            addCriterion("fileName not in", values, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameBetween(String value1, String value2) {
+            addCriterion("fileName between", value1, value2, "filename");
+            return (Criteria) this;
+        }
+
+        public Criteria andFilenameNotBetween(String value1, String value2) {
+            addCriterion("fileName not between", value1, value2, "filename");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

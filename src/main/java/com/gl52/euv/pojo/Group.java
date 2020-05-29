@@ -13,6 +13,8 @@ public class Group implements Serializable {
 
     private Integer isValid;
 
+    private String filename;
+
     private byte[] file;
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +57,14 @@ public class Group implements Serializable {
 
     public void setIsValid(Integer isValid) {
         this.isValid = isValid;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename == null ? null : filename.trim();
     }
 
     public byte[] getFile() {

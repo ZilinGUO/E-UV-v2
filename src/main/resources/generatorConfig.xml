@@ -55,7 +55,7 @@
 
 <!--        <table tableName="t_subject" schema="" domainObjectName="Subject"></table>-->
 
-        <table tableName="t_evaluation" schema="" domainObjectName="Evaluation"></table>
+        <table tableName="t_meeting" schema="" domainObjectName="Meeting"></table>
 
 <!--        <table tableName="t_response" schema="" domainObjectName="Response"></table>-->
 
