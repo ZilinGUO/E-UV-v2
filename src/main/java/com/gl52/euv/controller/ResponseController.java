@@ -47,7 +47,7 @@ public class ResponseController {
             int userId= (int) session.getAttribute("userId");
 
             if(responseService.createResponse(eid,userId,rcontent)){
-               return "/evaluation/evaluations";
+               return "redirect:/Evaluation/upateAndfindAllEvaluation.do";
             }
 
             return null;

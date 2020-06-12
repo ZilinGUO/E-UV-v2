@@ -249,7 +249,7 @@
     where rid = #{rid,jdbcType=INTEGER}
   </update>
   <select id="getResponseByEvaluationId"  resultType="java.util.Map">
-    select r.*,u.user_name from t_response r inner join t_user u on r.rstudent_id =u.id where revaluation_id = #{eid}
+    select * from (select r.revaluation_id,r.rcontent,u.user_name,max(rcreated) as rcreated from t_response r inner join t_user u on r.rstudent_id =u.id GROUP BY r.rstudent_id)as total where total.revaluation_id = #{eid}
   </select>
 
 </mapper>
