@@ -36,19 +36,19 @@
                 </div>
                 <div>
                     <dl class="dl-horizontal" th:each="user:${hashMap.users}">
-                        <dt>member：</dt >
+                        <dt>member:&nbsp;&nbsp;&nbsp;</dt >
                         <dd th:text="${user.userName}"></dd>
                     </dl>
                 </div>
                 <div>
                     <dl class="dl-horizontal" >
-                        <dt>rendez-vous：</dt >
+                        <dt>rendez-vous:&nbsp;&nbsp;&nbsp;</dt >
                         <dd th:text="${hashMap.meeting.mdate}" th:if="${not #strings.isEmpty(hashMap.meeting)}"></dd>
                     </dl>
                 </div>
                 <div >
                     <dl class="dl-horizontal">
-                        <dt>Fichier：</dt >
+                        <dt>Fichier:&nbsp;&nbsp;&nbsp;</dt >
                         <a id="fileName" onclick="exportFile()" th:text="${hashMap.group.filename}" th:if="${not #strings.isEmpty(hashMap.group.filename)}"></a>
 <!--                        <dd th:text="${user.userName}"></dd>-->
                     </dl>

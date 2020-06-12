@@ -56,13 +56,13 @@ $(document).ready(function(){
             width: 50
         },{
             field:'subjectname',  //返回json中的name
-            title:'subject name',   //表格表头显示文字
+            title:'Nom du projet',   //表格表头显示文字
             halign:'center', //表头居中
             align:'center',
             valign: 'middle' // 上下居中
         },{
             field:'description',  //返回json中的name
-            title:'description',   //表格表头显示文字
+            title:'Description',   //表格表头显示文字
             halign:'center',
             align:'center',   //左右居中
             valign: 'middle', // 上下居中

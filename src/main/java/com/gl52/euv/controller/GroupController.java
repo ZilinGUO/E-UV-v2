@@ -75,6 +75,8 @@ public class GroupController {
     }
 
 
+
+
     /**
      * create a group
      * @param map
@@ -128,7 +130,27 @@ public class GroupController {
             e.printStackTrace();
             return  null;
         }
-    };
+    }
+
+
+    /**
+     * enter a group
+     * @param map
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/validerGroup.do")
+    public String validerGroup ( HttpSession session,@RequestParam Map<String, Object> map,Map<String, Object> param) throws Exception {
+        try {
+            int groupId = Integer.parseInt(map.get("groupId").toString());
+            groupService.validerGroup(groupId);
+            return "groups";
+
+        }   catch (Exception e) {
+            e.printStackTrace();
+            return  null;
+        }
+    }
     /**
      * upload file
      * @param request

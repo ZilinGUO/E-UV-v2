@@ -102,4 +102,11 @@ public class GroupServiceImpl implements GroupService {
         group.setFilename(originalFilename);
         groupMapper.updateByPrimaryKeyWithBLOBs(group);
     }
+    @Transactional
+    @Override
+    public void validerGroup(int groupId) {
+        Group group=groupMapper.selectByPrimaryKey(groupId);
+        group.setIsValid(1);
+        groupMapper.updateByPrimaryKeyWithBLOBs(group);
+    }
 }

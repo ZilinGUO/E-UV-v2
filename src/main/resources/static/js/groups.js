@@ -27,9 +27,12 @@ $(document).ready(function(){
         success: function (data) {
             if(data!=null&&data.role==1){
                  $('#enterGroup').hide();
+                $('#validerGroup').hide();
+
             }else if(data!=null&&data.role==0){
                 $('#joinGroup').hide();
                 $('#creatGroup').hide();
+
             }
             if(data!=null&&data.groupid!=null){
                 window.groupId=data.groupid;
@@ -79,7 +82,7 @@ $(document).ready(function(){
             valign: 'middle' // 上下居中
         },{
             field:'subjectName',  //返回json中的name
-            title:'subject name ',   //表格表头显示文字
+            title:'Nom du projet',   //表格表头显示文字
             halign:'center',
             align:'center',   //左右居中
             valign: 'middle' // 上下居中
@@ -95,22 +98,22 @@ $(document).ready(function(){
                 return value;
         }
         },
-        //     {
-        //     field:'is_valid',  //返回json中的name
-        //     title:'valide',   //表格表头显示文字
-        //     halign:'center',
-        //     align:'center',   //左右居中
-        //     valign: 'middle' ,// 上下居中
-        //     formatter:function(value,row,index){
-        //         var value="";
-        //         if(row.is_valid=="0"){
-        //             value = "Non";
-        //         }else{
-        //             value = "Oui";
-        //         };
-        //         return value;
-        //     }
-        // }
+            {
+            field:'is_valid',  //返回json中的name
+            title:'valide',   //表格表头显示文字
+            halign:'center',
+            align:'center',   //左右居中
+            valign: 'middle' ,// 上下居中
+            formatter:function(value,row,index){
+                var value="";
+                if(row.is_valid=="0"){
+                    value = "Non";
+                }else{
+                    value = "Oui";
+                };
+                return value;
+            }
+        }
         ]
     });
 
@@ -184,4 +187,22 @@ function enterMyGroup() {
         return;
     }
     window.parent.document.getElementById("J_iframe").setAttribute('src',"/Group/groupPage.do?groupId="+row[0].groupId);
+}
+
+function validerGroup() {
+    var row=$("#table").bootstrapTable('getSelections');
+    if(row==null||row.length==0){
+        alert('Sélectionner un groupe');
+        return;
+    }
+    if(row.length!=1){
+        alert('Sélectionner un groupe');
+        return;
+    }
+    if(row[0].is_valid==1){
+        alert('Le groupe a été validé');
+        return;
+    }
+
+    window.parent.document.getElementById("J_iframe").setAttribute('src',"/Group/validerGroup.do?groupId="+row[0].groupId);
 }

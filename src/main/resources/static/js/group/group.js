@@ -79,7 +79,7 @@ $(document).ready(function(){
         msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
 
     }).on("filebatchuploadsuccess", function(event,data,previewId,index) {
-        debugger;
+
         if(data.response){
             $("#fileName").text(data.response.fileName);
             alert(data.response.message);

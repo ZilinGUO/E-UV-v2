@@ -95,8 +95,7 @@ public class ProjectController {
     public String subjectInformation (@RequestParam Integer subjectId,Map<String, Object> map) throws Exception {
         try {
         Subject subject=projectService.getSubjectById(subjectId);
-        map.put("subjectName",subject.getSubjectname());
-        map.put("description",subject.getDescription());
+        map.put("subject",subject);
             return "subjectInformation";
         }  catch (Exception e) {
         e.printStackTrace();
